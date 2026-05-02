@@ -33,5 +33,4 @@ export class AppComponent {
   // Moderne Dependency Injection mit inject()
   protected themeService = inject(ThemeService);
   
-  // Kein toggleTheme mehr in der Komponente, alles im Service!
 }
