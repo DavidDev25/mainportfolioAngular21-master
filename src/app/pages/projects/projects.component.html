@@ -1,0 +1,77 @@
+<section class="projects" [ngClass]="{'dark-projects': themeService.isDarkTheme()}">
+  <div class="section-content">
+    <h1 class="projects__title">Meine Projekte</h1>
+    
+    <div class="projects__content">
+      <div class="projects-container">
+        @for (project of projects; track $index) {
+          <div class="project-card" (click)="openModal(project)">
+            <h3>{{ project.title }}</h3>
+            <img *ngIf="project.imageUrl" [src]="project.imageUrl" alt="{{ project.title }}">
+            
+            <div class="tech-icons">
+              @for (segment of project.description; track $index) {
+                @if (segment.type === 'icon') {
+                  <span class="tech-icon" [innerHTML]="getIconSvg(segment)"></span>
+                }
+              }
+            </div>
+            
+            <p class="project-description">
+              @for (segment of project.description; track $index) {
+                @if (segment.type === 'text') {
+                  <span>{{ segment.content }}</span>
+                }
+              }
+            </p>      
+            <div class="project-buttons">
+              <a *ngIf="project.link" class="project-button live-test" [href]="project.link" target="_blank">Live Test</a>
+              <a *ngIf="project.githubLink" class="project-button github" [href]="project.githubLink" target="_blank">
+                <span [innerHTML]="getSvgIcon('Github')"></span> GitHub
+              </a>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="modal" *ngIf="showModal">
+  <div class="modal-content" [ngClass]="{'dark-modal': themeService.isDarkTheme()}">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <button class="nav-button prev" (click)="previousProject()">&#8249;</button>
+    <button class="nav-button next" (click)="nextProject()">&#8250;</button>
+    <h2 *ngIf="selectedProject">{{ selectedProject.title }}</h2>
+    
+    <div class="project-image-container" *ngIf="selectedProject">
+      <img *ngIf="selectedProject.imageUrl" [src]="selectedProject.imageUrl" alt="{{ selectedProject.title }}">
+    </div>
+
+    <div class="tech-icons" *ngIf="selectedProject">
+      @for (segment of selectedProject.description; track $index) {
+        @if (segment.type === 'icon') {
+          <span class="tech-icon" [innerHTML]="getIconSvg(segment)"></span>
+        }
+      }
+    </div>
+    
+
+    <p class="project-description" *ngIf="selectedProject">
+      @for (segment of selectedProject.description; track $index) {
+        @if (segment.type === 'text') {
+          <span>{{ segment.content }}</span>
+        }
+      }
+    </p>
+
+    
+    <div class="project-buttons" *ngIf="selectedProject">
+      <a *ngIf="selectedProject.link" class="project-button live-test" [href]="selectedProject.link" target="_blank">Live Test</a>
+      <a *ngIf="selectedProject.githubLink" class="project-button github" [href]="selectedProject.githubLink" target="_blank">
+        <span [innerHTML]="getSvgIcon('Github')"></span> GitHub
+      </a>
+    </div>
+  </div>
+</div>

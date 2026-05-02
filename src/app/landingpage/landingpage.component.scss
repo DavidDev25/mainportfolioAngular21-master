@@ -1,0 +1,22 @@
+section {
+  position: relative;
+  min-height: 100vh;
+  scroll-margin-top: 80px; 
+  padding: 80px 20px 20px; 
+  box-sizing: border-box; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  
+  > app-home, > app-about-me, > app-skills, > app-projects, > app-contact-me {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    z-index: 2; 
+  }
+  
+  .wave-divider {
+    margin-top: 40px;
+    z-index: 1;
+  }
+}

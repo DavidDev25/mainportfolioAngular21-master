@@ -1,0 +1,44 @@
+<section class="testimonials" [ngClass]="{'dark-testimonials': themeService.isDarkTheme()}">
+  <div class="testimonials__content">
+    <h1 class="testimonials__title">{{ title }}</h1>
+    <p class="testimonials__subtitle">{{ subtitle }}</p>
+    
+    <div class="testimonials__carousel">
+      <button class="testimonials__nav testimonials__nav--prev" (click)="prevTestimonial()">
+        <span class="testimonials__arrow">&lt;</span>
+      </button>
+      
+      <div class="testimonials__container">
+        <div class="testimonials__item">
+          <div class="testimonials__quote-icon">
+            <span [innerHTML]="getSvgIcon('QuoteLeft')"></span>
+          </div>
+          <p class="testimonials__text">{{ testimonials[currentIndex].content }}</p>
+          <div class="testimonials__person">
+            <div class="testimonials__avatar" *ngIf="testimonials[currentIndex].avatar">
+              <img [src]="testimonials[currentIndex].avatar" alt="{{ testimonials[currentIndex].name }}">
+            </div>
+            <div class="testimonials__info">
+              <h3 class="testimonials__name">{{ testimonials[currentIndex].name }}</h3>
+              <p class="testimonials__position">{{ testimonials[currentIndex].position }}, {{ testimonials[currentIndex].company }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <button class="testimonials__nav testimonials__nav--next" (click)="nextTestimonial()">
+        <span class="testimonials__arrow">&gt;</span>
+      </button>
+    </div>
+    
+    <div class="testimonials__dots">
+      @for (testimonial of testimonials; track testimonial.id) {
+        <button 
+          class="testimonials__dot" 
+          [class.testimonials__dot--active]="$index === currentIndex"
+          (click)="goToTestimonial($index)">
+        </button>
+      }
+    </div>
+  </div>
+</section>

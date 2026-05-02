@@ -1,0 +1,97 @@
+<section class="contact-me" [ngClass]="{'dark-contact': themeService.isDarkTheme()}">
+  <div class="contact-me__content">
+    <h1 class="contact-me__title">{{ title }}</h1>
+    
+    <div class="contact-me__info">
+      <div class="contact-me__method">
+        <div class="contact-me__icon">
+          <span [innerHTML]="getSvgIcon('Email')"></span>
+        </div>
+        <h3>Email</h3>
+        <p>{{ emailText }}</p>
+        <p><a href="mailto:{{emailAddress}}">{{ emailAddress }}</a></p>
+      </div>
+      
+      @if (showLocation) {
+        <div class="contact-me__method">
+          <div class="contact-me__icon">
+            <span [innerHTML]="getSvgIcon('Location')"></span>
+          </div>
+          <h3>Standort</h3>
+          <p>{{ locationText }}</p>
+          <p>{{ location }}</p>
+        </div>
+      }
+    </div>
+    
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-me__form">
+      <div class="contact-me__form-group">
+        <label for="name">{{ nameLabelText }}</label>
+        <input 
+          type="text" 
+          id="name" 
+          formControlName="name" 
+          [ngClass]="{'contact-me__input-error': submitted && f['name'].errors}">
+        @if (submitted && f['name'].errors) {
+          <span class="contact-me__error-message">{{ nameErrorText }}</span>
+        }
+      </div>
+      
+      <div class="contact-me__form-group">
+        <label for="email">{{ emailLabelText }}</label>
+        <input 
+          type="email" 
+          id="email" 
+          formControlName="email"
+          [ngClass]="{'contact-me__input-error': submitted && f['email'].errors}">
+        @if (submitted && f['email'].errors) {
+          <span class="contact-me__error-message">
+            @if (f['email'].errors['required']) {
+              {{ emailRequiredErrorText }}
+            } @else if (f['email'].errors['email']) {
+              {{ emailInvalidErrorText }}
+            }
+          </span>
+        }
+      </div>
+      
+      <div class="contact-me__form-group">
+        <label for="subject">{{ subjectLabelText }}</label>
+        <input 
+          type="text" 
+          id="subject" 
+          formControlName="subject"
+          [ngClass]="{'contact-me__input-error': submitted && f['subject'].errors}">
+        @if (submitted && f['subject'].errors) {
+          <span class="contact-me__error-message">{{ subjectErrorText }}</span>
+        }
+      </div>
+      
+      <div class="contact-me__form-group contact-me__form-group--full">
+        <label for="message">{{ messageLabelText }}</label>
+        <textarea 
+          id="message" 
+          formControlName="message" 
+          rows="6"
+          [ngClass]="{'contact-me__input-error': submitted && f['message'].errors}"></textarea>
+        @if (submitted && f['message'].errors) {
+          <span class="contact-me__error-message">{{ messageErrorText }}</span>
+        }
+      </div>
+      
+      <button type="submit" class="btn-text" [class.dark]="themeService.isDarkTheme()" [disabled]="loading">
+        @if (loading) {
+          <span class="contact-me__spinner"></span>
+        } @else {
+          {{ submitButtonText }}
+        }
+      </button>
+      
+      @if (submitSuccess) {
+        <div class="contact-me__success-message">
+          {{ successMessageText }}
+        </div>
+      }
+    </form>
+  </div>
+</section>

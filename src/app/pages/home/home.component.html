@@ -1,0 +1,54 @@
+<section class="home" [ngClass]="{'dark-home': themeService.isDarkTheme()}">
+  <h1 class="home__notice">{{notice}}</h1>
+  <div class="home__content">
+    <h1 class="home__title">{{ title }}</h1>
+    
+    <div class="profileImage-container">
+      <img [src]="profileImage" alt="Profilbild" />
+    </div>
+    
+    <p class="home__subtitle">{{ subtitle }}</p>
+    <div class="home__description">
+      <p>{{ description }}</p>
+    </div>
+    
+    <div class="home__socials">
+      @for (social of socialLinks; track social.name) {
+        <a [ngClass]="{'dark-home': themeService.isDarkTheme()}" 
+           [href]="social.url" 
+           target="_blank" 
+           class="social-button" 
+           [attr.aria-label]="social.name">
+          <span class="svg-container" 
+                [class]="social.iconName?.toLowerCase() + '-icon'" 
+                [innerHTML]="getSvgIcon(social.iconName ?? '')"></span>
+          <span class="social-name">{{ social.name }}</span>
+        </a>
+      }
+      
+      <div class="dropdown-container">
+        <button class="social-button" 
+                [ngClass]="{'dark-home': themeService.isDarkTheme()}"
+                (click)="toggleDownloadDropdown($event)">
+          <span class="download-icon" [innerHTML]="getSvgIcon('Download')"></span>
+          <span class="social-name">Download</span>
+        </button>
+        <div class="dropdown-menu" [class.show]="isDownloadDropdownOpen">
+          @for (download of downloadLabels; track download.name) {
+            <a class="dropdown-item"
+              [ngClass]="{'dark-dropdown-item': themeService.isDarkTheme()}"
+              (click)="downloadFile($event, download)">
+              <span class="download-name">{{ download.name }}</span>
+            </a>
+          }
+        </div>
+      </div>
+    </div>
+    
+    <div class="home__cta-container">
+      <a class="btn-text" [class.dark]="themeService.isDarkTheme()" (click)="scrollToContact($event)">
+        Kontakt aufnehmen
+      </a>
+    </div>
+  </div>
+</section>

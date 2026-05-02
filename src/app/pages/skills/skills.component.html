@@ -1,0 +1,20 @@
+<section class="skills" [ngClass]="{'dark-skills': themeService.isDarkTheme()}">
+  <div class="skills__content">
+    <h1 class="skills__title">My Skillset</h1>
+    
+    <div class="motivation-text">
+      <p>{{motivationText}}</p>
+    </div>
+  
+    <div class="slider-container">
+      <div class="slider-track" #sliderTrack>
+        @for (icon of displayIcons; track $index) {
+          <div class="slider-item">
+            <div [innerHTML]="getSvgIcon(icon)" class="icon-container"></div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+

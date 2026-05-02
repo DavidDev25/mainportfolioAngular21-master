@@ -1,0 +1,146 @@
+nav, .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+
+.navbar {
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem;
+  
+  &.dark-navbar {
+    background-color: rgba(30, 30, 45, 0.9);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .dwLogo {
+    display: flex;
+    width: 50px;
+    height: 50px;
+    margin-right: auto;
+    margin-left: 2rem;
+    align-self: center;
+    fill: #007bff;     
+    transition: fill 0.3s ease;
+    
+    &.dark-logo {
+      fill: #5caaff;
+    }
+  }
+
+  .nav-links-container {
+    display: flex;
+    align-items: center;
+    margin-right: 3.5rem;
+  }
+  
+  .navWrapper {
+    margin-left: 1.5rem;
+    
+    > a {
+      text-decoration: none;
+      color: #333333; 
+      font-size: 24px;
+      cursor: pointer;
+      padding: 5px 8px;
+      margin-left: 1.5rem;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        color: #007bff;
+      }
+
+      &.active {
+        color: #007bff;
+        background-color: transparent;
+        font-weight: bold;
+        border-bottom: 2px solid #007bff;
+      }
+      
+      &.dark {
+        color: white; // Changed from #f0f0f0 to pure white
+        
+        &:hover {
+          color: #5caaff;
+        }
+        
+        &.active {
+          color: #5caaff;
+          border-bottom: 2px solid #5caaff;
+        }
+      }
+    }
+ 
+    .contact-button {
+      background-color: #007bff;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        background-color: #0056b3;
+      }
+      
+      &.active {
+        background-color: #0056b3;
+        color: white; 
+      }
+      
+      &.dark-button {
+        background-color: #5caaff;
+        
+        &:hover {
+          background-color: #3d8be0;
+        }
+        
+        &.active {
+          background-color: #3d8be0;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 0.5rem;
+    
+    .dwLogo {
+      margin: 0.5rem auto;
+    }
+    
+    .nav-links-container {
+      width: 100%;
+      justify-content: center;
+      margin-right: 0;
+      flex-wrap: wrap;
+    }
+    
+    .navWrapper {
+      margin: 0.3rem;
+      
+      > a {
+        font-size: 18px;
+        margin-left: 0.5rem;
+      }
+      
+      .contact-button {
+        font-size: 16px;
+        padding: 6px 12px;
+      }
+    }
+  }
+}

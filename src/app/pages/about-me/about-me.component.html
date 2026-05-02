@@ -1,0 +1,23 @@
+<section class="about-me" [ngClass]="{'dark-about': themeService.isDarkTheme()}">
+    <div class="about-me__content">
+        <h1 class="about-me__title">{{ title }}</h1>
+        
+        <p class="about-me__primary-text">
+            {{ primaryText }}
+        </p>
+        
+        <p class="about-me__secondary-text">
+            {{ secondaryText }}
+        </p>
+        
+        <p class="about-me__description">
+            {{ description }}
+        </p>
+        
+        <p class="about-me__knowledge">
+            {{ knowledge }}
+        </p>
+
+
+    </div>
+</section>
